@@ -1,9 +1,10 @@
 import asyncio
+import aiofiles
 
 async def read_file(file_name):
-    await asyncio.sleep(5)  # Simulate the delay of reading a file
-    print(f"{file_name} read successfully")
-    return(f"Contents of {file_name}")
+    async with aiofiles.open(file_name, "r", encoding="utf-8") as file:
+        content = await file.read()
+    return(f"Contents of {file_name} {content[:100]}")
 
 async def main():
     liste_task = []
@@ -11,6 +12,6 @@ async def main():
         task = asyncio.create_task(read_file(file))
         liste_task.append(task)
     for task in liste_task:
-        await task
+        print(await task)
 
 asyncio.run(main())
