@@ -1,0 +1,1 @@
+salutation = "Je vais me faire livencier!"
